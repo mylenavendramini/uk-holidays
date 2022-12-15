@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.uk-container,
+.inputs {
+  justify-content: center;
+  margin: 2rem;
+}
+
+input {
+  margin-left: 40%;
+}
+
+h1,
+h3,
+p {
+  text-align: center;
+  padding: 1rem;
+}
