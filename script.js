@@ -1,26 +1,39 @@
 document.getElementById("buttonEW").addEventListener("click", getHolidayEW);
 document.getElementById("buttonS").addEventListener("click", getHolidayS);
 document.getElementById("buttonNI").addEventListener("click", getHolidayNI);
+const url = "https://www.gov.uk/bank-holidays.json";
+
 function refresh() {
-  document.querySelector("input").value = "";
+  document.getElementById("inputEW").value = "";
+  document.getElementById("inputS").value = "";
+  document.getElementById("inputNI").value = "";
 }
+
 document.querySelector("button").addEventListener("click", newClick);
 
 let elementClicked = false;
 
 function newClick() {
   console.log("element clicked");
+  let para = document.createElement("p");
+  let div = document.querySelector(".text-output");
   if (elementClicked) {
     console.log("button has already been clicked before");
+    console.log(div);
+    while (div.hasChildNodes()) {
+      div.removeChild(div.firstChild);
+    }
+    // div.removeChild(para);
+    console.log(div);
   }
 
   elementClicked = true;
 }
 
 function getHolidayEW() {
-  let inputEW = document.getElementById("inputEW").value;
+  let inputEW = document.getElementById("inputEW").value.toLowerCase();
 
-  fetch("https://www.gov.uk/bank-holidays.json")
+  fetch(url)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -33,25 +46,23 @@ function getHolidayEW() {
       data["england-and-wales"].events.forEach((event) => {
         holiday = event.title;
         date = event.date;
-        if (holiday.toLowerCase().includes(inputEW)) {
+        const para = document.createElement("p");
+        para.textContent = `${holiday}: ${date}`;
+        const div = document.querySelector(".text-output");
+        if (inputS !== "" && holiday.toLowerCase().includes(inputEW)) {
           holidayArr.push(holiday, date);
-          const para = document.createElement("p");
-          const node = document.createTextNode(`${holiday}: ${date}`);
-          para.appendChild(node);
-          document.querySelector(".england-and-wales").appendChild(para);
+          div.appendChild(para);
         }
+        refresh();
       });
-      // 1) refresh the page
-      // 2) look for date
+      newClick();
     })
     .catch((err) => console.log(`error${err}`));
-  refresh();
-  newClick();
 }
 function getHolidayS() {
-  let inputS = document.getElementById("inputS").value;
+  let inputS = document.getElementById("inputS").value.toLowerCase();
 
-  fetch("https://www.gov.uk/bank-holidays.json")
+  fetch(url)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -65,21 +76,23 @@ function getHolidayS() {
       data.scotland.events.forEach((event) => {
         holiday = event.title;
         date = event.date;
-        if (holiday.toLowerCase().includes(inputS)) {
+        const para = document.createElement("p");
+        para.textContent = `${holiday}: ${date}`;
+        const div = document.querySelector(".text-output");
+
+        if (inputS !== "" && holiday.toLowerCase().includes(inputS)) {
           holidayArr.push(holiday, date);
-          const para = document.createElement("p");
-          const node = document.createTextNode(`${holiday}: ${date}`);
-          para.appendChild(node);
-          document.querySelector(".scotland").appendChild(para);
+          div.appendChild(para);
         }
       });
     })
     .catch((err) => console.log(`error${err}`));
   refresh();
+  newClick();
 }
 function getHolidayNI() {
-  let inputNI = document.getElementById("inputNI").value;
-  fetch("https://www.gov.uk/bank-holidays.json")
+  let inputNI = document.getElementById("inputNI").value.toLowerCase();
+  fetch(url)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -93,16 +106,15 @@ function getHolidayNI() {
       data["northern-ireland"].events.forEach((event) => {
         holiday = event.title;
         date = event.date;
-        if (holiday.toLowerCase().includes(inputNI)) {
+        const para = document.createElement("p");
+        para.textContent = `${holiday}: ${date}`;
+        const div = document.querySelector(".text-output");
+        if (inputS !== "" && holiday.toLowerCase().includes(inputNI)) {
           holidayArr.push(holiday, date);
-          const para = document.createElement("p");
-          const node = document.createTextNode(`${holiday}: ${date}`);
-          para.appendChild(node);
-          document.querySelector(".northern-ireland").appendChild(para);
+          div.appendChild(para);
         }
       });
-      // 1) refresh the page
-      // 2) look for date
+      // newClick();
     })
     .catch((err) => console.log(`error${err}`));
 

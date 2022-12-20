@@ -13,8 +13,23 @@ html {
   margin: 2rem;
 }
 
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.inputs div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-align: center;
+}
+
+button,
 input {
-  margin-left: 40%;
+  margin: auto 8rem;
 }
 
 h1,
