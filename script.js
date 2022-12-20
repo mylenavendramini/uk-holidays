@@ -53,11 +53,11 @@ function getHolidayEW() {
           holidayArr.push(holiday, date);
           div.appendChild(para);
         }
-        refresh();
       });
-      newClick();
     })
     .catch((err) => console.log(`error${err}`));
+  refresh();
+  newClick();
 }
 function getHolidayS() {
   let inputS = document.getElementById("inputS").value.toLowerCase();
@@ -114,11 +114,10 @@ function getHolidayNI() {
           div.appendChild(para);
         }
       });
-      // newClick();
     })
     .catch((err) => console.log(`error${err}`));
-
   refresh();
+  newClick();
 }
 
 // const button = document.querySelector("button");
